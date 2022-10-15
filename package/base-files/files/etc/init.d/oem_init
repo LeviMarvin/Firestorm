@@ -1,0 +1,36 @@
+#!/bin/sh /etc/rc.common
+# Firestorm OEM code initialization script
+# Copyright (C) 2022 TrusAuth, Inc.
+ 
+START=20
+#STOP=20
+
+start() {        
+        echo "[OEM] Initialization script starting..."
+	export FIRESTORM_OEM_A=0
+	export FIRESTORM_TA_ENABLED=0
+
+	config_fs
+	config_ta
+}
+
+stop() {          
+        echo "[OEM] Exiting..."
+	export FIRESTORM_OEM_A=1
+}
+
+config_fs() {
+	export FIRESTORM="_FIRESTORM_"
+} 
+
+config_ta() {
+	export FIRESTORM_TA_ENABLED=1
+
+	export FIRESTORM_TA_VERSION="0.1"
+	export FIRESTORM_TA_UPDATE=20221004
+	export FIRESTORM_TA_SECURELEVEL="L0"
+	export FIRESTORM_TA_FEATURES="[NONE]"
+
+	export TA_TRUSTSTORAGE_VERSION="1.0"
+	export TA_TRUSTSTORAGE_LOCKED=1
+}
